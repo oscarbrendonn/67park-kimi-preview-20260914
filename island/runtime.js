@@ -1,7 +1,8 @@
+import {applyKimiCoast20} from '/67park-kimi-preview-20260914/app/kimi-coast20.js?v=coast-20a';
 import {cleanLowerPark} from '/67park-kimi-preview-20260914/app/park-lower-cleanup.js?v=20260914p';
 import {repairEastRoadEnd} from '/67park-kimi-preview-20260914/app/east-road-end.js?v=20260914-east1';
 import {installLobbyCourts} from '../app/lobby-courts.js';
-import {shortenKimiRightTip} from '/67park-kimi-preview-20260914/app/kimi-right-curb-tip.js?v=20260914-tip1';
+import {shortenKimiRightTip} from '/67park-kimi-preview-20260914/app/kimi-right-curb-tip.js?v=coast-20a';
 import {installIslandSwimBoundary} from '/67park-kimi-preview-20260914/app/island-swim-runtime.js';
 import {installParcelGapQA} from '/67park-kimi-preview-20260914/app/parcel-gap-qa.js';
 import {applyParcelPaving} from '/67park-kimi-preview-20260914/app/island-parcel-paving.js';
@@ -1566,7 +1567,7 @@ await entryStage(13,'Finishing the northern neighbourhood');
   renderer.domElement.dataset.parkEdges=JSON.stringify(applyParkEdges(kok,parkEdgePatch));
   const curbJoinPatch=await islandFetch('/67park-kimi-preview-20260914/repairs/curb-joins-v3.json').then(r=>{if(!r.ok)throw Error('Curb join repair missing');return r.json();});
   renderer.domElement.dataset.curbJoins=JSON.stringify(applyCurbJoins(kok,curbJoinPatch));
-  renderer.domElement.dataset.parcelPaving=JSON.stringify(applyParcelPaving(kok));shortenKimiRightTip(kok);repairEastRoadEnd(kok);cleanLowerPark(kok);
+  renderer.domElement.dataset.parcelPaving=JSON.stringify(applyParcelPaving(kok));shortenKimiRightTip(kok);repairEastRoadEnd(kok);cleanLowerPark(kok);applyKimiCoast20(kok);
   const stairGeometry=repairIslandStairs(kok);
   renderer.domElement.dataset.stairGeometry=JSON.stringify(stairGeometry.stats);
   zeminler=zeminler.filter(m=>!stairGeometry.nonWalkableNames.includes(m.name));
