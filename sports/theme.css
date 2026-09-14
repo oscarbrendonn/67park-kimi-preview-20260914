@@ -12,4 +12,14 @@
 [hidden]{display:none!important}
 .sp-turn{background:#f5f0e5e8;border:1px solid #fff7e9;border-radius:16px;padding:8px 15px;box-shadow:0 4px 18px #27393414}.sp-turn h2{text-shadow:none}
 @media(min-width:701px){.sp-turn{top:132px;left:22px;transform:none;text-align:left;max-width:300px}.sp-turn h2{font-size:20px}}
+/* Reserve the preview/status strip instead of clipping the sports header. */
+body:has(#github-preview-notice) .sp-top{top:calc(var(--preview-top,24px) + 16px)}
+body:has(#github-preview-notice) .sp-scoreboard{top:calc(var(--preview-top,24px) + 24px)}
+body:has(#github-preview-notice) .sp-turn{top:calc(var(--preview-top,24px) + 132px)}
+@media(max-width:700px){
+ body:has(#github-preview-notice) .sp-top{top:calc(var(--preview-top,24px) + 10px)}
+ body:has(#github-preview-notice) .sp-scoreboard{top:calc(var(--preview-top,24px) + 92px)}
+ body:has(#github-preview-notice) .sp-turn{top:calc(var(--preview-top,24px) + 155px)}
+ body:has(#github-preview-notice) .sp-status{top:calc(var(--preview-top,24px) + 71px)}
+}
 @media(max-width:700px){.sp-turn{padding:6px 10px}.sp-turn h2{font-size:18px}.sp-turn p{font-size:11px}}
