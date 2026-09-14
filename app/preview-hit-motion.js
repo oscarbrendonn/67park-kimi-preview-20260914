@@ -35,6 +35,7 @@ export function addPreviewActionClips(clips) {
     BiscepL: sequence([-.15,0,-.1], [-.3,0,-.1], [-.15,0,0]),
     ArmL: sequence([.4,0,0], [.55,0,0], [.3,0,0]),
   });
+  punch.tracks = punch.tracks.filter(t => /^(Spine[123]|Head|Biscep[LR]|Arm[LR]|Hand[LR])\.quaternion$/.test(t.name));
   const landing = poseClip('land', .32, {
     Spine1: sequence([.16,0,0], [.1,0,0], [.035,0,0]),
     ThighL: sequence([-.24,0,0], [-.16,0,0], [-.04,0,0]),
@@ -80,7 +81,7 @@ export function updatePreviewHit(state, dt, allowed) {
   active = Boolean(allowed && state.enabled && state.grounded && !document.hidden);
   if (button) button.hidden = !active;
   cooldown = Math.max(0, cooldown - dt);
-  if (!active || state.jumped || state.speed >= .3) { queued = false; elapsed = 0; }
+  if (!active || state.jumped) { queued = false; elapsed = 0; }
   if (queued) { elapsed = .46; cooldown = .65; queued = false; }
   state.punchT = elapsed;
   elapsed = Math.max(0, elapsed - dt);

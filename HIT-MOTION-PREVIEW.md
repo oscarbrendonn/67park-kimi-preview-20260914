@@ -2,7 +2,9 @@
 
 Original releases and map geometry are unchanged. Familiar controls from the previous preview remain unchanged.
 
-- F / Vur: locally authored short punch on the existing character rig; moving cancels it, with no movement lock.
+- F / Vur: locally authored upper-body additive punch on the existing rig. Running continues underneath; jumping cancels it. No movement lock.
+- Fluid-motion-2: visual facing follows the shortest turn arc independently of immediate physics heading. Transition time warping removed. Moving landings retain the locomotion clip.
+- Latest rollback checkpoint: `checkpoint-before-fluid-motion-20260914`.
 - Landing uses a short knee/torso recovery; existing compact airborne pose remains.
 - Reduced-motion disables additional squash/stretch. No new camera flash, knockback, physics or model download.
 - This is animation feedback, not multiplayer combat. No player damage or networked pushing is implemented. The multiplayer server is still not connected.
