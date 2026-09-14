@@ -1,4 +1,4 @@
-import {applyKimiCoast20} from '/67park-kimi-preview-20260914/app/kimi-coast20.js?v=coast-20a';
+import {applyKimiCoast20} from '/67park-kimi-preview-20260914/app/kimi-coast20.js?v=coast-24';
 import {cleanLowerPark} from '/67park-kimi-preview-20260914/app/park-lower-cleanup.js?v=20260914p';
 import {repairEastRoadEnd} from '/67park-kimi-preview-20260914/app/east-road-end.js?v=20260914-east1';
 import {installIslandDriving as __parkInstallDriving} from '/67park-kimi-preview-20260914/app/island-drive-area.js';

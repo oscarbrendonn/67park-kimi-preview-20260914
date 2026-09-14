@@ -1,7 +1,7 @@
 import * as T from 'three';
-import {coast20Data as data} from './kimi-coast20-data.js?v=coast-20a';
+import {coast20Data as data} from './kimi-coast20-data.js?v=coast-24';
 
-// Only the southwest coastline of the right island. Reuse the pavement mesh
+// Only missing southern shoreline strips of the right island. Reuse the pavement mesh
 // and material so visual geometry and the final floor sampler stay identical.
 export function applyKimiCoast20(root){
  if(root.userData.kimiCoast20)return root.userData.kimiCoast20;
@@ -30,5 +30,5 @@ export function applyKimiCoast20(root){
  if(Number.isFinite(old.drawRange.count))next.setDrawRange(0,ix.length);
  next.computeBoundingBox();next.computeBoundingSphere();
  mesh.geometry=next;added.dispose();
- return root.userData.kimiCoast20={version:20,area:data.area,triangles:data.ix.length/3,buriedCapFacesRemoved:removed,addedDrawCalls:0,grassUnchanged:true,roadUnchanged:true,sandRamp:true};
+ return root.userData.kimiCoast20={version:20,revision:data.revision,area:data.area,triangles:data.ix.length/3,buriedCapFacesRemoved:removed,addedDrawCalls:0,grassUnchanged:true,roadUnchanged:true,referenceWidth:data.referenceWidth,referenceBevel:data.referenceBevel};
 }
