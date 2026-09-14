@@ -15,11 +15,12 @@ export function showLocalSpeech(text){
   document.body.append(bubble);
  }
  bubble.textContent=message; // Never interpret chat as HTML.
- bubble.hidden=true;expires=performance.now()+4500;
+ // Start the reading time only once the keyboard/menu has released the view.
+ bubble.hidden=true;expires=0;
 }
 export function updateLocalSpeech(context){
  if(!bubble)return;
- if(performance.now()>expires||document.hidden||!context?.camera||!context.position||context.blocked||context.hawk||context.parked||!context.control){bubble.hidden=true;return;}
+ if((expires&&performance.now()>expires)||document.hidden||!context?.camera||!context.position||context.blocked||context.hawk||context.parked){bubble.hidden=true;return;}
  if(visual!==context.visual){visual=context.visual;head=null;headPadding=.55;visual?.traverse?.(node=>{if(!head&&node.isBone&&/^Head(?:_\d+)?$/.test(node.name))head=node;});
   if(head){visual.updateWorldMatrix(true,true);head.getWorldPosition(anchor);bounds.setFromObject(visual);if(Number.isFinite(bounds.max.y))headPadding=Math.max(.12,bounds.max.y-anchor.y);}
  }
@@ -30,5 +31,6 @@ export function updateLocalSpeech(context){
  const rect=document.querySelector('canvas')?.getBoundingClientRect();
  const width=rect?.width||innerWidth,height=rect?.height||innerHeight;
  bubble.style.transform=`translate(${(rect?.left||0)+(anchor.x+1)*width/2}px,${(rect?.top||0)+(1-anchor.y)*height/2-12}px) translate(-50%,-100%)`;
+ if(!expires)expires=performance.now()+10000;
  bubble.hidden=false;
 }
