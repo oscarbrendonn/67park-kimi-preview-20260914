@@ -47,7 +47,7 @@ export function addPreviewActionClips(clips) {
 
 let button, active = false, queued = false, cooldown = 0, elapsed = 0;
 function request(event) {
-  if (!active || cooldown > 0) return;
+  if (!active || cooldown > 0 || document.querySelector('.wardrobe,[role="dialog"]')) return;
   event?.preventDefault();
   queued = true;
 }
@@ -69,6 +69,10 @@ function install() {
   const cancel = () => { queued = false; active = false; elapsed = 0; cooldown = 0; button.hidden = true; };
   window.addEventListener('blur', cancel);
   document.addEventListener('visibilitychange', () => { if (document.hidden) cancel(); });
+  new MutationObserver(records => {
+    if (records.some(record => Array.from(record.addedNodes).some(node =>
+      node.nodeType === 1 && (node.matches('.wardrobe,[role="dialog"]') || node.querySelector('.wardrobe,[role="dialog"]'))))) cancel();
+  }).observe(document.getElementById('root'), {childList:true,subtree:true});
   document.body.append(button);
 }
 export function updatePreviewHit(state, dt, allowed) {
