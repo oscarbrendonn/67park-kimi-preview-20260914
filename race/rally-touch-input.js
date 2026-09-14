@@ -30,6 +30,7 @@ export function bindRallyTouch(get, held, notify) {
   });
   el.addEventListener('keydown',e=>{if(e.code==='Enter'||e.code==='Space'){e.preventDefault();e.stopPropagation();keys.add(name);sync()}});
   el.addEventListener('keyup',e=>{if(e.code==='Enter'||e.code==='Space'){e.preventDefault();e.stopPropagation();keys.delete(name);sync()}});
+  el.addEventListener('blur',()=>{if(keys.delete(name))sync()});
   el.addEventListener('contextmenu',e=>e.preventDefault());
  }
  return {reset(){pointers.clear();keys.clear();sync()}};
