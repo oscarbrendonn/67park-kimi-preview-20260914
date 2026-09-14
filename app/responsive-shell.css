@@ -6,7 +6,7 @@ body:has(#github-preview-notice) .wardrobe{top:var(--preview-top);height:calc(10
 .park-toolbar>span{min-width:0;overflow:hidden;text-overflow:ellipsis}
 .park-chat{z-index:60;bottom:calc(92px + env(safe-area-inset-bottom));max-width:calc(100vw - 24px)}
 .park-chat:has(input){width:min(360px,calc(100vw - 24px))!important}
-.park-chat input{min-width:0;font-size:16px!important;min-height:36px}
+.park-chat input{min-width:0;font-size:18px!important;min-height:40px}
 .park-chat button{min-height:44px;min-width:44px}
 .park-chat>div:first-child:not(:has(input)){max-height:min(24dvh,160px);overflow-y:auto;overscroll-behavior:contain}
 .park-chat:has(input)>div:last-child{background:#fff8eef5}

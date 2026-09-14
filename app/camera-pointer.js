@@ -1,4 +1,4 @@
-import {isTextEntry} from './text-input-guard.js?v=chat-28';
+import {isTextEntry} from './text-input-guard.js?v=mobile-29';
 // Pointer ownership shared by character and fallback orbit cameras.
 // No movement physics, zoom, camera distance or gesture sensitivity changes.
 const UI='button,a,input,textarea,select,[contenteditable="true"],[role="button"],[role="dialog"],.park-stick,.park-action,.park-touch,.park-toolbar,.park-chat,.claude-emote-panel,.park-inventory-panel,.wardrobe,.online-dialog';
@@ -24,6 +24,7 @@ export function beginCameraDrag(event,current=null){
  return drag;
 }
 export function moveCameraDrag(drag,event){
+ if(drag&&isTextEntry())return {ended:true};
  if(!drag||drag.id!==event.pointerId)return null;
  if(!Number.isFinite(event.clientX)||!Number.isFinite(event.clientY))return null;
  // A missed release must never leave mouse-look latched.
