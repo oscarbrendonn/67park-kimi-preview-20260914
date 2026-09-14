@@ -1,9 +1,4 @@
 const notice=document.createElement('aside');
-notice.id='github-preview-notice';
-notice.setAttribute('role','status');
-notice.textContent='Preview · Multiplayer not connected';
-const sheet=document.createElement('link');
-sheet.rel='stylesheet';
-sheet.href=new URL('./responsive-shell.css?v=responsive-15',import.meta.url).href;
-document.head.append(sheet);
-document.body.append(notice);
+notice.id='github-preview-notice';notice.setAttribute('role','status');notice.textContent='Online test · Connecting…';
+const sheet=document.createElement('link');sheet.rel='stylesheet';sheet.href=new URL('./responsive-shell.css?v=responsive-15',import.meta.url).href;document.head.append(sheet);document.body.append(notice);
+let last='';const update=()=>{const online=window.__candyOnline?.data?.connected,lobby=window.__eggyNet?.connected;const label=online&&lobby?'Online test · Mac mini connected':'Online test · Server disconnected — reconnecting…';if(label!==last){notice.textContent=label;notice.dataset.connected=String(!!online&&!!lobby);last=label;}};const timer=setInterval(update,1000);window.addEventListener('pagehide',()=>clearInterval(timer),{once:true});
