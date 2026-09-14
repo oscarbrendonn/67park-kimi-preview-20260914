@@ -67,7 +67,7 @@ function install() {
   button.type = 'button';
   button.textContent = 'Punch · F';
   button.setAttribute('aria-label', 'Punch (F)');
-  button.title = 'Animation preview — no player damage';
+  button.title = 'Punch nearby bots — online player damage is disabled';
   button.style.cssText = 'position:fixed;right:20px;bottom:calc(280px + env(safe-area-inset-bottom));z-index:50;padding:14px 18px;border:2px solid #fff9;border-radius:20px;background:#f4c7d4;color:#493e45;box-shadow:0 4px 0 #b596a2;font:600 14px system-ui;touch-action:manipulation;';
   button.addEventListener('click', request);
   button.addEventListener('pointerdown', request);
@@ -90,6 +90,7 @@ function install() {
 }
 export function updatePreviewHit(state, dt, allowed) {
   install();
+  state.punchImpact=false;
   dt = Number.isFinite(dt) ? Math.max(0,Math.min(dt,.05)) : 0;
   active = Boolean(allowed && state.enabled && state.grounded && !document.hidden);
   if (button) button.hidden = !active;
@@ -97,6 +98,8 @@ export function updatePreviewHit(state, dt, allowed) {
   if (!active || state.jumped) { queued = false; elapsed = 0; }
   if (queued) { elapsed = .46; cooldown = .65; queued = false; }
   state.punchT = elapsed;
-  elapsed = Math.max(0, elapsed - dt);
+  const nextElapsed = Math.max(0, elapsed - dt);
+  state.punchImpact = elapsed > .32 && nextElapsed <= .32;
+  elapsed = nextElapsed;
   if (button) { button.setAttribute('aria-disabled', String(cooldown > 0)); button.dataset.active = String(elapsed > 0); }
 }
