@@ -46,51 +46,8 @@ export function addPreviewActionClips(clips) {
   return [...clips.map(c => c.name === 'land' ? landing : c), punch];
 }
 
-let button, active = false, queued = false, cooldown = 0, elapsed = 0;
-function visibleMenu() {
-  return Array.from(document.querySelectorAll('.wardrobe,[role="dialog"]')).some(node =>
-    !node.hidden && node.getAttribute('aria-hidden') !== 'true' && node.getClientRects().length > 0);
-}
-function request(event) {
-  if (event?.type === 'pointerdown' && event.button !== 0) return;
-  if (!active || queued || cooldown > 0 || visibleMenu()) return;
-  event?.preventDefault();
-  event?.stopPropagation();
-  queued = true;
-}
-function install() {
-  if (button || typeof document === 'undefined') return;
-  button = document.createElement('button');
-  button.id = 'preview-hit';
-  button.type = 'button';
-  button.textContent = 'Punch · F';
-  button.setAttribute('aria-label', 'Punch (F)');
-  button.title = 'Animation preview — no player damage';
-  button.style.cssText = 'position:fixed;right:20px;bottom:calc(280px + env(safe-area-inset-bottom));z-index:50;padding:14px 18px;border:2px solid #fff9;border-radius:20px;background:#f4c7d4;color:#493e45;box-shadow:0 4px 0 #b596a2;font:600 14px system-ui;touch-action:manipulation;';
-  button.addEventListener('click', request);
-  button.addEventListener('pointerdown', request);
-  window.addEventListener('keydown', event => {
-    if (event.code !== 'KeyF' || event.repeat || event.ctrlKey || event.metaKey || event.altKey) return;
-    if (event.target?.closest?.('input,textarea,select,[contenteditable="true"],[role="textbox"]')) return;
-    request(event);
-  });
-  const cancel = () => { queued = false; active = false; elapsed = 0; cooldown = 0; button.hidden = true; };
-  window.addEventListener('blur', cancel);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) cancel(); });
-  new MutationObserver(records => {
-    if (records.some(record => Array.from(record.addedNodes).some(node =>
-      node.nodeType === 1 && (node.matches('.wardrobe,[role="dialog"]') || node.querySelector('.wardrobe,[role="dialog"]'))))) { if (visibleMenu()) cancel(); }
-  }).observe(document.getElementById('root'), {childList:true,subtree:true});
-  document.body.append(button);
-}
-export function updatePreviewHit(state, dt, allowed) {
-  install();
-  active = Boolean(allowed && state.enabled && state.grounded && !document.hidden);
-  if (button) button.hidden = !active;
-  cooldown = Math.max(0, cooldown - dt);
-  if (!active || state.jumped) { queued = false; elapsed = 0; }
-  if (queued) { elapsed = .46; cooldown = .65; queued = false; }
-  state.punchT = elapsed;
-  elapsed = Math.max(0, elapsed - dt);
-  if (button) { button.disabled = cooldown > 0; button.dataset.active = String(elapsed > 0); }
+// Quarantined after a user-reported freeze. No input listeners or DOM observers.
+// Animation assets remain recoverable in git; do not re-enable without device QA.
+export function updatePreviewHit(state) {
+  state.punchT = 0;
 }
