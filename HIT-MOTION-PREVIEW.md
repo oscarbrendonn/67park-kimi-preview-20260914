@@ -1,5 +1,7 @@
 # Isolated action animation preview
 
+CURRENT STATUS — Punch is disabled after a reported game freeze. The separate button and F listener are removed; the action timer is forced to zero. This is mitigation, not a verified root-cause fix. Desktop Buddy #1 did not reproduce the freeze; device and exact button identification are pending. Earlier feature notes below describe the quarantined experiment.
+
 Original releases and map geometry are unchanged. Familiar controls from the previous preview remain unchanged.
 
 - F / Vur: locally authored upper-body additive punch on the existing rig. Running continues underneath; jumping cancels it. No movement lock.
