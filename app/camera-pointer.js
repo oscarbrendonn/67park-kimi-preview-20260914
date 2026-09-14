@@ -1,7 +1,9 @@
+import {isTextEntry} from './text-input-guard.js?v=chat-28';
 // Pointer ownership shared by character and fallback orbit cameras.
 // No movement physics, zoom, camera distance or gesture sensitivity changes.
 const UI='button,a,input,textarea,select,[contenteditable="true"],[role="button"],[role="dialog"],.park-stick,.park-action,.park-touch,.park-toolbar,.park-chat,.claude-emote-panel,.park-inventory-panel,.wardrobe,.online-dialog';
 export function cameraCanvasEvent(event){
+ if(isTextEntry())return false;
  const target=event?.target;
  if(target?.tagName!=='CANVAS'||target.closest?.(UI))return false;
  const path=event.composedPath?.()||[];
