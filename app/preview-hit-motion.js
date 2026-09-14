@@ -53,9 +53,11 @@ function visibleMenu() {
 }
 function request(event) {
   if (event?.type === 'pointerdown' && event.button !== 0) return;
-  if (!active || queued || cooldown > 0 || visibleMenu()) return;
   event?.preventDefault();
   event?.stopPropagation();
+  // Consume rejected taps too: they must not focus the button or reach world controls.
+  if (event?.type === 'click' && event.detail > 0) return;
+  if (!active || queued || cooldown > 0 || visibleMenu()) return;
   queued = true;
 }
 function install() {
@@ -88,6 +90,7 @@ function install() {
 }
 export function updatePreviewHit(state, dt, allowed) {
   install();
+  dt = Number.isFinite(dt) ? Math.max(0,Math.min(dt,.05)) : 0;
   active = Boolean(allowed && state.enabled && state.grounded && !document.hidden);
   if (button) button.hidden = !active;
   cooldown = Math.max(0, cooldown - dt);
