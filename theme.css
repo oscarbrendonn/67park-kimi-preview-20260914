@@ -3924,3 +3924,7 @@ body:has(.wardrobe) .online-toggle{visibility:hidden}
 @media(max-width:370px){.wardrobe-boxes .wardrobe-header{padding-inline:8px}.wardrobe-boxes .wardrobe-header>img{width:63px}.wardrobe-boxes .wardrobe-header nav button{padding-inline:7px}.wardrobe-boxes .wardrobe-main{padding-inline:5px}.wardrobe-boxes .wardrobe-panel{padding-inline:10px}}
 @media(max-height:520px) and (orientation:landscape){.wardrobe-boxes .wardrobe-main{grid-template-columns:minmax(0,38fr) minmax(0,62fr);grid-template-rows:minmax(0,1fr);height:calc(100% - 60px);gap:10px}.wardrobe-boxes .wardrobe-stage{margin:0}.wardrobe-boxes .wardrobe-bottom{position:static}.wardrobe-boxes .wardrobe-panel{overflow-y:auto}.wardrobe-boxes .wardrobe-options{flex:none;overflow:visible}.wardrobe-boxes .wardrobe-grid{grid-template-rows:repeat(2,132px)}}
 @media(prefers-reduced-motion:reduce){.wardrobe-boxes .wardrobe-item,.wardrobe-boxes .wardrobe-enter{transition:none}.wardrobe-boxes .wardrobe-toybox:hover,.wardrobe-boxes .wardrobe-toybox[data-previewing=true],.wardrobe-boxes button:active:not(:disabled){transform:none}}
+
+/* Quiet pavement-pink character backdrop; no island image behind the avatar. */
+.wardrobe-stage,.wardrobe-boxes .wardrobe-stage{background:#e4cdca}
+.wardrobe-stage::before,.wardrobe-boxes .wardrobe-stage::before{background:none}
