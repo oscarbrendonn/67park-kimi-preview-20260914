@@ -1,4 +1,4 @@
-import {PREVIEW_BACKEND,PREVIEW_VARIANT} from './preview-network-config.js?v=online-19';
+import {PREVIEW_BACKEND,PREVIEW_VARIANT} from './preview-network-config.js?v=qa26';
 
 const key='67park.preview.guest.v1.'+PREVIEW_VARIANT;
 const sharedKey=Symbol.for('67park.preview.transport.v1.'+PREVIEW_VARIANT);
