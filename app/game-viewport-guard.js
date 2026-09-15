@@ -1,10 +1,10 @@
 // Gameplay owns multi-touch, not the browser's page magnifier. Keep Pointer
 // Events flowing to the joystick, action buttons and custom overhead-map zoom.
 export function installGameViewportGuard(doc = document, win = window) {
- const surfaces = 'canvas,.park-stick,.park-action,#preview-hit,.park-toolbar,.park-weather,#hawk-map-navigation,.park-chat>button,.online-toggle';
- const excluded = 'input,textarea,select,[contenteditable],.wardrobe,[role="dialog"],.online-dialog,.park-inventory-panel,.claude-emote-panel';
- const editable = node => !!node?.closest?.('input,textarea,select,[contenteditable]');
- const playing = () => !!doc.querySelector('.park-hud') && !doc.querySelector('.wardrobe') && !editable(doc.activeElement);
+ const surfaces = 'canvas,.park-stick,.park-action,#preview-hit,.park-toolbar,.park-weather,#hawk-map-navigation,.park-chat>button,.online-toggle,.sp-controls,.rr-controls,.cr-pad,.cr-tools,.cr-jump,#touch-ui';
+ const excluded = 'input:not([type="range"]),textarea,select,[contenteditable],.wardrobe,[role="dialog"],.online-dialog,.park-inventory-panel,.claude-emote-panel';
+ const editable = node => !!node?.closest?.('input:not([type="range"]),textarea,select,[contenteditable]');
+ const playing = () => (!!doc.querySelector('.park-hud') || !!doc.querySelector('.sp-controls,.rr-controls,.cr-pad,#touch-ui')) && !doc.querySelector('.wardrobe') && !editable(doc.activeElement);
  const gameTarget = node => !!node?.closest?.(surfaces) && !node.closest(excluded);
  let owned = false;
  const prevent = event => { if (event.cancelable) event.preventDefault(); };
