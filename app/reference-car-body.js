@@ -1,6 +1,7 @@
 import * as T from 'three';
 import {mergeGeometries,mergeVertices} from '../island/utils/BufferGeometryUtils.js';
 import {RoundedBoxGeometry} from '../island/utils/RoundedBoxGeometry.js';
+import {addParkPlates} from './vehicle-branding.js?v=fleet-38';
 
 // The reference is a moulded, body-colour retro compact. Geometry is native 3D:
 // an open passenger compartment, independent wheels, and no painted-on windows.
@@ -247,15 +248,7 @@ function geometryLibrary(){
  const kGlyph=new T.Shape();kGlyph.moveTo(0,0);
  for(const p of [[.21,0],[.21,.48],[.58,0],[.83,0],[.37,.64],[.80,1.2],[.55,1.2],[.21,.74],[.21,1.2],[0,1.2]])kGlyph.lineTo(...p);
  kGlyph.closePath();
- for(const side of [-1,1]){
-  for(const [glyph,x] of [[six,-.339],[seven,-.189]]){
-   const g=new T.ExtrudeGeometry(glyph,{depth:.014,bevelEnabled:false,curveSegments:5});
-   add('seal',g,[side*x,.875,side*2.501],[.15,.15,.15],[0,side<0?Math.PI:0,0]);
-  }
-  for(const [glyph,x] of [[pGlyph,.005],[aGlyph,.095],[rGlyph,.187],[kGlyph,.287]]){
-   add('seal',new T.ShapeGeometry(glyph,5),[side*x,.902,side*2.502],[.105,.105,.105],[0,side<0?Math.PI:0,0]);
-  }
- }
+ // The authentic multicolour logo is shared by every vehicle, not black text.
  oval('metal',0,1.382,2.400,.036,.069,.018,10,6);
  // Retained seats/steering sit in a real hollow space above this low floor.
  box('seat',2.22,.13,.30,.055,0,1.125,.705);
@@ -326,5 +319,5 @@ export function useReferenceCarBody(car){
   for(const [key,m] of Object.entries(materials))if(key!=='seat')m.dispose();
   if(--leases===0&&cached===library){for(const g of library.geometries.values())g.dispose();cached=null;}
  };
- return car;
+ return addParkPlates(car);
 }

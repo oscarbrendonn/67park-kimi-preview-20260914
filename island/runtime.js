@@ -3,7 +3,7 @@ import {cleanLowerPark} from '/67park-kimi-preview-20260914/app/park-lower-clean
 import {repairEastRoadEnd} from '/67park-kimi-preview-20260914/app/east-road-end.js?v=20260914-east1';
 import {installLobbyCourts} from '../app/lobby-courts.js';
 import {shortenKimiRightTip} from '/67park-kimi-preview-20260914/app/kimi-right-curb-tip.js?v=coast-20a';
-import {installIslandSwimBoundary} from '/67park-kimi-preview-20260914/app/island-swim-runtime.js?v=drive-35';
+import {installIslandSwimBoundary} from '/67park-kimi-preview-20260914/app/island-swim-runtime.js?v=fleet-38';
 import {installParcelGapQA} from '/67park-kimi-preview-20260914/app/parcel-gap-qa.js';
 import {applyParcelPaving} from '/67park-kimi-preview-20260914/app/island-parcel-paving.js';
 import {installParcelCornerQA} from '/67park-kimi-preview-20260914/app/parcel-corner-qa.js';
@@ -39,7 +39,7 @@ import {isMiniBowl64,isLargeSkatepark64,applyMiniBowlRender64,applyLargeSkatepar
 import {installCurbShadows49} from './curb-shadow-v49.js?v=curb6';
 import {createPastelWater} from './pastel-water-v23.js?v=softwave24-2';
 import {applyRoadJoin} from './road-join-v34.js';
-import {installCarControls108,createPastelTraffic108} from './pastel-car-v108.js?v=drive-35';
+import {installCarControls108,createPastelTraffic108} from './pastel-car-v108.js?v=fleet-38';
 import {createTerrainSampler} from './terrain-sampler-v27.js?v=1';
 import {sealOpenTerrain,unifyCurbFinish,sealBridgeApron} from './surface-seal-v32.js?v=2';
 import { GLTFLoader } from './GLTFLoader.js';
@@ -1514,7 +1514,7 @@ await entryStage(8,'Preparing the garden plaza');
     lowerPlaza83=await loadLowerPlaza83({scene:sahne,renderer,sample:zeminVurusu,variant:'kimi'});
   } catch(e){renderer.domElement.dataset.lowerPlaza83='error: '+e.message;console.error('Lower plaza',e);}
   try {
-    const {loadNorthwestSports97}=await import('./northwest-sports-v97.js?v=97.5');
+    const {loadNorthwestSports97}=await import('./northwest-sports-v97.js?v=fleet-38');
 await entryStage(9,'Preparing sports grounds');
     northwestSports97=await loadNorthwestSports97({scene:sahne,renderer,sample:zeminVurusu,variant:'kimi',terrainRoot:kok});
     renderer.domElement.__northwestSports97=northwestSports97;

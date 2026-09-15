@@ -1,4 +1,5 @@
 import * as T from 'three';
+import {installParkedFleet} from '../app/parked-fleet.js?v=fleet-38';
 import {GLTFLoader} from './GLTFLoader.js';
 import {finishCityMaterial60} from './city-props-v60.js';
 import {createCityHeightSampler58} from './city-height-sampler58.js';
@@ -45,6 +46,8 @@ export async function loadNorthwestSports97({scene,renderer,sample,variant,terra
  // Use the very same exposure as the existing skatepark, without whitening it.
  function update(dt,camera){exposure.value=1;plants.update(dt,camera);}
  update();scene.add(group);group.updateMatrixWorld(true);
+ const fleet=installParkedFleet(group);
+ group.userData.fleetStats=fleet.stats;
  const stats={version:97,revision:metadata.revision,buildings:2,grandstands:2,lanes:6,parkedCars:metadata.parking.cars,parkingSpaces:metadata.parking.spaces,baseball:'grass, ochre fan, green square, four bases, pitcher mound, lines',concreteReference:concrete.color.getHexString(),trees:metadata.trees,benches:metadata.benches,draws,triangles,
   origin:[metadata.origin[0],ground,metadata.origin[1]],hiddenTerrain,roadsModified:false,curbsModified:false};
  renderer.domElement.dataset.northwestSports97=JSON.stringify(stats);
