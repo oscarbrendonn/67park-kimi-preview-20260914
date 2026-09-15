@@ -1,4 +1,5 @@
 import * as T from 'three';
+import {updateParkDriving} from '../app/park-driving-tuning.js?v=drive-35';
 import {CAR110,BUS110,createCandyVehicle110} from './candy-vehicle-model-v110.js?v=110.2';
 import {createCityHeightSampler58} from './city-height-sampler58.js';
 import {restoreBasePose} from './six-seven-movement-v28.js';
@@ -44,6 +45,7 @@ export class RoadCarPhysics108{
  }
  stop(){this.speed=0;this.accumulator=0;}
  update(dt,{throttle=0,steer=0,brake=false}={}){
+  if(this.spec.halfLength<3)return updateParkDriving(this,dt,{throttle,steer,brake});
   if(!Number.isFinite(dt+throttle+steer)){this.stop();return;}
   dt=clamp(dt,0,.05);throttle=clamp(throttle,-1,1);steer=clamp(steer,-1,1);this.accumulator+=dt;this.distance=0;this.reason='';
   while(this.accumulator+1e-9>=CAR108.step){

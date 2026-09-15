@@ -27,7 +27,7 @@ import {isMiniBowl64,isLargeSkatepark64,applyMiniBowlRender64,applyLargeSkatepar
 import {installCurbShadows49} from './curb-shadow-v49.js?v=curb6';
 import {createPastelWater} from './pastel-water-v23.js?v=softwave24-2';
 import {applyRoadJoin} from './road-join-v34.js';
-import {installCarControls108,createPastelTraffic108} from './pastel-car-v108.js?v=110.2';
+import {installCarControls108,createPastelTraffic108} from './pastel-car-v108.js?v=drive-35';
 import {createTerrainSampler} from './terrain-sampler-v27.js?v=1';
 import {sealOpenTerrain,unifyCurbFinish,sealBridgeApron} from './surface-seal-v32.js?v=2';
 import { GLTFLoader } from './GLTFLoader.js';

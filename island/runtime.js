@@ -3,7 +3,7 @@ import {cleanLowerPark} from '/67park-kimi-preview-20260914/app/park-lower-clean
 import {repairEastRoadEnd} from '/67park-kimi-preview-20260914/app/east-road-end.js?v=20260914-east1';
 import {installLobbyCourts} from '../app/lobby-courts.js';
 import {shortenKimiRightTip} from '/67park-kimi-preview-20260914/app/kimi-right-curb-tip.js?v=coast-20a';
-import {installIslandSwimBoundary} from '/67park-kimi-preview-20260914/app/island-swim-runtime.js';
+import {installIslandSwimBoundary} from '/67park-kimi-preview-20260914/app/island-swim-runtime.js?v=drive-35';
 import {installParcelGapQA} from '/67park-kimi-preview-20260914/app/parcel-gap-qa.js';
 import {applyParcelPaving} from '/67park-kimi-preview-20260914/app/island-parcel-paving.js';
 import {installParcelCornerQA} from '/67park-kimi-preview-20260914/app/parcel-corner-qa.js';
@@ -39,7 +39,7 @@ import {isMiniBowl64,isLargeSkatepark64,applyMiniBowlRender64,applyLargeSkatepar
 import {installCurbShadows49} from './curb-shadow-v49.js?v=curb6';
 import {createPastelWater} from './pastel-water-v23.js?v=softwave24-2';
 import {applyRoadJoin} from './road-join-v34.js';
-import {installCarControls108,createPastelTraffic108} from './pastel-car-v108.js?v=110.2';
+import {installCarControls108,createPastelTraffic108} from './pastel-car-v108.js?v=drive-35';
 import {createTerrainSampler} from './terrain-sampler-v27.js?v=1';
 import {sealOpenTerrain,unifyCurbFinish,sealBridgeApron} from './surface-seal-v32.js?v=2';
 import { GLTFLoader } from './GLTFLoader.js';
