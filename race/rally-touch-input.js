@@ -1,3 +1,4 @@
+import {steeringFromDrag} from '../app/control-tuning.js?v=camera-36';
 export function bindRallyTouch(get, held, notify) {
  const names=['left','right','gas','brake'];
  const buttons=Object.fromEntries(names.map(n=>[n,get('rr-'+n)]));
@@ -33,5 +34,33 @@ export function bindRallyTouch(get, held, notify) {
   el.addEventListener('blur',()=>{if(keys.delete(name))sync()});
   el.addEventListener('contextmenu',e=>e.preventDefault());
  }
- return {reset(){pointers.clear();keys.clear();sync()}};
+ const wheel=get('rr-wheel'),knob=wheel.querySelector('span');
+ let owner=null,startX=0,analog=0;
+ const paint=()=>{knob.style.transform=`translateX(${-analog*38}px)`;wheel.setAttribute('aria-valuenow',String(Math.round(-analog*100)));notify();};
+ wheel.addEventListener('pointerdown',e=>{
+  if(owner!==null||e.pointerType==='mouse'&&e.button!==0)return;
+  e.preventDefault();owner=e.pointerId;startX=e.clientX;analog=0;
+  try{wheel.setPointerCapture(owner)}catch{}
+  paint();
+ });
+ wheel.addEventListener('pointermove',e=>{
+  if(owner!==e.pointerId)return;e.preventDefault();analog=-steeringFromDrag(e.clientX,startX);paint();
+ });
+ for(const name of ['pointerup','pointercancel','lostpointercapture'])wheel.addEventListener(name,e=>{
+  if(owner!==e.pointerId)return;owner=null;analog=0;paint();
+ });
+ wheel.addEventListener('keydown',e=>{
+  if(!['ArrowLeft','ArrowRight','Home'].includes(e.code))return;
+  e.preventDefault();e.stopPropagation();analog=e.code==='ArrowLeft'?1:e.code==='ArrowRight'?-1:0;paint();
+ });
+ wheel.addEventListener('keyup',e=>{
+  if(!['ArrowLeft','ArrowRight','Home'].includes(e.code))return;e.stopPropagation();analog=0;paint();
+ });
+ wheel.addEventListener('blur',()=>{if(owner===null){analog=0;paint();}});
+ wheel.addEventListener('contextmenu',e=>e.preventDefault());
+ return {steer:()=>analog,reset(){
+  const id=owner;owner=null;analog=0;
+  try{if(id!==null&&wheel.hasPointerCapture?.(id))wheel.releasePointerCapture(id)}catch{}
+  pointers.clear();keys.clear();sync();paint();
+ }};
 }
